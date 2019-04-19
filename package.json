@@ -2,9 +2,12 @@
   "name": "bsb",
   "version": "1.0",
   "description": "Banco seguro do brasil",
-  "main": "main.js",
+  "main": "bsb-cliente.js",
   "repository": "https://github.com/luizfilho00/bsb.git",
   "author": "Luiz Filho",
   "license": "MIT",
-  "private": false
+  "private": false,
+  "dependencies": {
+    "sqlite-sync": "^0.3.8"
+  }
 }

@@ -14,7 +14,7 @@ module.exports = class Cliente {
 
     getNome() { return this.nome; }
     getApelido() { return this.apelido; }
-    getConta() { return this.conta.getConta(); }
+    getConta() { return this.conta.print(); }
     getSaldo() { return this.conta.getSaldo(); }
     getChequeEspecial() { return this.conta.getChequeEspecial(); }
 

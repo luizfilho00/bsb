@@ -5,6 +5,8 @@ class Conta {
         this.senha = senha;
         this.saldo = saldo;
         this.chequeEspecial = chequeEspecial;
+        this.LIMITE_DEPOSITO = 3000;
+        this.LIMITE_SAQUE = 1000;
     }
 
     getSaldo() { return this.saldo; }
@@ -26,7 +28,7 @@ class Conta {
         var soma = random.toString().split('').map(Number).reduce((a, b) => a + b);
         var digitoVerificador = soma % 10;
         this.digitoVerificador = digitoVerificador;
-        var numeroConta = (random + "-" + digitoVerificador).toString();
+        var numeroConta = random.toString();
         return numeroConta;
     }
 
@@ -61,10 +63,31 @@ class Conta {
     }
 
     static _checarLogin() {
-        console.log(digito);
         if (contaExiste(conta) && conferirSenha(senha)) {
 
         }
+    }
+
+    /**
+     * Incrementa valor em saldo se o valor é <= 3000
+     * @param {FloatNumber} valor 
+     */
+    depositar(valor) {
+        if (parseFloat(valor) == NaN) {
+            console.error("Insira um valor válido!");
+            return false;
+        }
+        if (valor > LIMITE_DEPOSITO) {
+            console.log("Valor limite para depósitos: " + LIMITE_DEPOSITO);
+            return false;
+        }
+        this.saldo += valor;
+        console.log("Depósito efetuado com sucesso!\nSaldo: " + this.getSaldo());
+        return true;
+    }
+
+    print() {
+        return this.conta + '-' + this._getDigito();
     }
 }
 
