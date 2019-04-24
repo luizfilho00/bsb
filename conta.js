@@ -1,6 +1,8 @@
 class Conta {
 
-    constructor(conta, senha, saldo, chequeEspecial) {
+    constructor(id, cliente, conta, senha, saldo, chequeEspecial) {
+        this.id = id;
+        this.cliente = cliente;
         this.conta = conta;
         this.senha = senha;
         this.saldo = saldo;
@@ -9,15 +11,18 @@ class Conta {
         this.LIMITE_SAQUE = 1000;
     }
 
+    getCliente() { return this.cliente; }
+    getId() { return this.id; }
+    getSenha() { return this.senha; }
     getSaldo() { return this.saldo; }
     getChequeEspecial() { return this.chequeEspecial; }
-    _getDigito() { return this.digitoVerificador };
+    getDigito() { return this.digitoVerificador };
     getConta() { return this.conta; }
 
     //Contas são criadas por padrão com saldo = 0 e cheque especial = 100
-    static criarConta(senha) {
+    static criarConta(cliente, senha) {
         var conta = Conta.gerarNumero();
-        return new Conta(conta, senha, 0, 100);
+        return new Conta(cliente, conta, senha, 0, 100);
     }
 
     /**
@@ -57,11 +62,13 @@ class Conta {
      * Verifica se essa conta existe no banco de dados
      * @param {string} conta 
      */
-
     static contaExiste(conta) {
         //TODO -> Se a conta existe no banco de dados retorna true
     }
 
+    /**
+     * Verifica se login é o mesmo passado pelo usuario
+     */
     static _checarLogin() {
         if (contaExiste(conta) && conferirSenha(senha)) {
 
@@ -87,7 +94,7 @@ class Conta {
     }
 
     print() {
-        return this.conta + '-' + this._getDigito();
+        return this.conta + '-' + this.getDigito();
     }
 }
 

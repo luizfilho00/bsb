@@ -1,14 +1,10 @@
 const Cliente = require('./cliente');
-const readline = require('readline');
+const read = require('./helpers');
 const Database = require('./database');
+const Gerente = require('./gerente');
 
-
-const db = new Database()
-
-const read = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout,
-})
+const gerente = new Gerente();
+const db = new Database();
 
 console.log("###### Banco Seguro do Brasil ######\n");
 console.log("0 - Acessar como Cliente\n1 - Acessar como Gerente");
@@ -29,22 +25,18 @@ function acessoCliente() {
     return true;
 }
 
-function acessoGerente() {
+async function acessoGerente() {
     console.log("###### Módulo Gerente ######");
     read.question('login: ', (user) => {
         read.question('senha: ', (pass) => {
             if (db.verificarGerente(user, pass)) {
-                exibirMenuGerente();
+                gerente.exibirMenu();
             }
             else {
                 console.error("Falha na autenticação!");
                 process.exit();
             }
-            read.close();
         });
     });
 }
 
-function exibirMenuGerente() {
-    console.log("Bem vindo Gerente!");
-}
