@@ -11,7 +11,7 @@ class Database {
      * @param {String} senha
      */
     verificarGerente(usuario, senha) {
-        console.log("Autenticando...");
+        console.log("\nAutenticando...\n");
         var result;
         sqlite.run("SELECT * FROM gerente;", rows => {
             result = rows[0];
@@ -51,7 +51,6 @@ class Database {
      * @param {Object} cliente
      */
     insertConta(conta) {
-        console.log(conta);
         let id = sqlite.insert("conta", {
             cliente: conta.cliente.id,
             numero: conta.numero,
