@@ -1,100 +1,54 @@
 class Conta {
-
-    constructor(id, cliente, conta, senha, saldo, chequeEspecial) {
-        this.id = id;
+    constructor(cliente, numero, digito, senha, saldo, chequeEspecial) {
         this.cliente = cliente;
-        this.conta = conta;
+        this.digito = digito;
+        this.numero = numero;
         this.senha = senha;
         this.saldo = saldo;
         this.chequeEspecial = chequeEspecial;
-        this.LIMITE_DEPOSITO = 3000;
-        this.LIMITE_SAQUE = 1000;
     }
-
-    getCliente() { return this.cliente; }
-    getId() { return this.id; }
-    getSenha() { return this.senha; }
-    getSaldo() { return this.saldo; }
-    getChequeEspecial() { return this.chequeEspecial; }
-    getDigito() { return this.digitoVerificador };
-    getConta() { return this.conta; }
 
     //Contas são criadas por padrão com saldo = 0 e cheque especial = 100
     static criarConta(cliente, senha) {
-        var conta = Conta.gerarNumero();
-        return new Conta(cliente, conta, senha, 0, 100);
+        const contaGerada = Conta.gerarNumero();
+        const numeroConta = contaGerada[0];
+        const digito = contaGerada[1];
+        return new Conta(cliente, numeroConta, digito, senha, 0, 0);
     }
 
     /**
      * Gera numero aleatório para conta com dígito verificador válido
      */
     static gerarNumero() {
-        var random = Math.floor(Math.random() * 90000) + 10000;
-        var soma = random.toString().split('').map(Number).reduce((a, b) => a + b);
-        var digitoVerificador = soma % 10;
-        this.digitoVerificador = digitoVerificador;
-        var numeroConta = random.toString();
-        return numeroConta;
+        const random = Math.floor(Math.random() * 90000) + 10000;
+        const soma = random
+            .toString()
+            .split("")
+            .map(Number)
+            .reduce((a, b) => a + b);
+        const digitoVerificador = soma % 10;
+        const numeroConta = random.toString();
+        return [numeroConta, digitoVerificador];
     }
 
     /**
      * Verifica se o dígito verificador da conta é um dígito válido
-     * @param {string} conta 
-     * @param {string} digito 
+     * @param {string} conta
+     * @param {string} digito
      */
-    _verificarDigito(conta, digito) {
-        var soma = conta.toString().split('').map(Number).reduce((a, b) => a + b, 0);
+    verificarDigito(conta, digito) {
+        var soma = conta
+            .toString()
+            .split("")
+            .map(Number)
+            .reduce((a, b) => a + b, 0);
         var digitoEsperado = soma % 10;
         if (digito != digitoEsperado) return false;
         return true;
     }
 
-    /**
-     * Verifica se a senha passada é a mesma da conta armazenada no banco de dados
-     * @param {string} senha 
-     */
-    _conferirSenha(senha) {
-        if (senha == this.senha) return true;
-        return false;
-    }
-
-    /**
-     * Verifica se essa conta existe no banco de dados
-     * @param {string} conta 
-     */
-    static contaExiste(conta) {
-        //TODO -> Se a conta existe no banco de dados retorna true
-    }
-
-    /**
-     * Verifica se login é o mesmo passado pelo usuario
-     */
-    static _checarLogin() {
-        if (contaExiste(conta) && conferirSenha(senha)) {
-
-        }
-    }
-
-    /**
-     * Incrementa valor em saldo se o valor é <= 3000
-     * @param {FloatNumber} valor 
-     */
-    depositar(valor) {
-        if (parseFloat(valor) == NaN) {
-            console.error("Insira um valor válido!");
-            return false;
-        }
-        if (valor > LIMITE_DEPOSITO) {
-            console.log("Valor limite para depósitos: " + LIMITE_DEPOSITO);
-            return false;
-        }
-        this.saldo += valor;
-        console.log("Depósito efetuado com sucesso!\nSaldo: " + this.getSaldo());
-        return true;
-    }
-
     print() {
-        return this.conta + '-' + this.getDigito();
+        return this.numero + "-" + this.digito;
     }
 }
 

@@ -1,18 +1,20 @@
 {
-  "name": "bsb",
-  "version": "1.0",
-  "description": "Banco seguro do Brasil",
-  "main": "main.js",
-  "repository": "https://github.com/luizfilho00/bsb.git",
-  "author": "Luiz Filho",
-  "license": "MIT",
-  "private": false,
-  "dependencies": {
-    "nodemon": "^1.18.11",
-    "sqlite-sync": "^0.3.8",
-    "yarn": "^1.15.2"
-  },
-  "scripts": {
-    "start": "node main.js"
-  }
+    "name": "bsb",
+    "version": "1.0",
+    "description": "Banco seguro do Brasil",
+    "main": "main.js",
+    "repository": "https://github.com/luizfilho00/bsb.git",
+    "author": "Luiz Filho",
+    "license": "MIT",
+    "private": false,
+    "dependencies": {
+        "sqlite-sync": "^0.3.8",
+        "yarn": "^1.15.2"
+    },
+    "scripts": {
+        "gerente": "node gerente.js",
+        "cliente": "node cliente.js",
+        "banco": "node banco.js"
+    },
+    "devDependencies": {}
 }
