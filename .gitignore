@@ -1,2 +1,2 @@
-node_modules
-sql-commands
+node_modules/
+sql-commands/*
