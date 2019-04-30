@@ -4,3 +4,10 @@
 
 
 Trabalho da disciplina: Segurança em redes
+
+Compilar: `yarn`
+
+Executar:
+* `yarn run gerente`
+
+* `yarn run cliente`
