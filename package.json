@@ -9,7 +9,7 @@
     "private": false,
     "dependencies": {
         "sqlite-sync": "^0.3.8",
-        "yarn": "^1.15.2"
+        "yarn": "^1.17.3"
     },
     "scripts": {
         "gerente": "node gerente.js",
